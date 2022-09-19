@@ -3,8 +3,6 @@ using ColossalFramework;
 using ColossalFramework.Plugins;
 using ColossalFramework.UI;
 using ICities;
-using RealGasStation.CustomAI;
-using RealGasStation.Patch;
 using RealGasStation.UI;
 using RealGasStation.Util;
 using System;

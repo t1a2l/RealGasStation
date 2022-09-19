@@ -1,6 +1,5 @@
 ﻿using ColossalFramework;
 using HarmonyLib;
-using RealGasStation.CustomAI;
 using RealGasStation.Util;
 using System;
 using System.Reflection;
@@ -10,6 +9,9 @@ namespace RealGasStation.Patch
     [HarmonyPatch]
     public static class CargoTruckAISetTargetPatch
     {
+        private delegate bool StartPathFindCargoTruckAIDelegate(CargoTruckAI __instance, ushort vehicleID, ref Vehicle vehicleData);
+        private static readonly StartPathFindCargoTruckAIDelegate StartPathFindCargoTruckAI = AccessTools.MethodDelegate<StartPathFindCargoTruckAIDelegate>(typeof(CargoTruckAI).GetMethod("StartPathFind", BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof(ushort), typeof(Vehicle).MakeByRefType() }, new ParameterModifier[] { }), null, false);
+
         public static MethodBase TargetMethod()
         {
             return typeof(CargoTruckAI).GetMethod("SetTarget", BindingFlags.Public | BindingFlags.Instance, null, new Type[] { typeof(ushort), typeof(Vehicle).MakeByRefType(), typeof(ushort) }, null);
@@ -30,7 +32,7 @@ namespace RealGasStation.Patch
                     data.m_waitCounter = 0;
                     ushort tempTargetBuilding = data.m_targetBuilding;
                     data.m_targetBuilding = MainDataStore.TargetGasBuilding[vehicleID];
-                    bool success = CustomCargoTruckAI.CustomStartPathFind(vehicleID, ref data);
+                    bool success = StartPathFindCargoTruckAI(__instance, vehicleID, ref data);
                     data.m_targetBuilding = tempTargetBuilding;
                     if (!success)
                     {

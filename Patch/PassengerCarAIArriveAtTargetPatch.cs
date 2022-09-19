@@ -1,13 +1,8 @@
 ﻿using ColossalFramework;
 using HarmonyLib;
-using RealGasStation.CustomAI;
-using RealGasStation.NewAI;
 using RealGasStation.Util;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using UnityEngine;
 
 namespace RealGasStation.Patch

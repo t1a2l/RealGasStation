@@ -1,9 +1,6 @@
 ﻿using ColossalFramework;
 using RealGasStation.Util;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 
 namespace RealGasStation.NewAI
@@ -16,32 +13,26 @@ namespace RealGasStation.NewAI
             int num28 = 0;
             int num29 = 0;
             int value = 0;
-            int num34 = 0;
-            TransferManager.TransferReason incomingTransferReason = default(TransferManager.TransferReason);
 
             //Petrol
-            incomingTransferReason = TransferManager.TransferReason.Petrol;
-            num27 = 0;
-            num28 = 0;
-            num29 = 0;
-            value = 0;
-            num34 = 0;
+            TransferManager.TransferReason incomingTransferReason = TransferManager.TransferReason.Petrol;
+
             if (incomingTransferReason != TransferManager.TransferReason.None && buildingData.m_flags.IsFlagSet(Building.Flags.Completed))
             {
                 CalculateGuestVehicles(buildingID, ref buildingData, incomingTransferReason, ref num27, ref num28, ref num29, ref value);
-                buildingData.m_tempImport = (byte)Mathf.Clamp(value, (int)buildingData.m_tempImport, 255);
+                buildingData.m_tempImport = (byte)Mathf.Clamp(value, buildingData.m_tempImport, 255);
             }
 
-            num34 = 50000 - MainDataStore.petrolBuffer[buildingID] - num29;
+            int num34 = 50000 - MainDataStore.petrolBuffer[buildingID] - num29;
             if (buildingData.m_flags.IsFlagSet(Building.Flags.Active) && buildingData.m_flags.IsFlagSet(Building.Flags.Completed))
             {
                 if (num34 >= 0)
                 {
-                    TransferManager.TransferOffer offer = default(TransferManager.TransferOffer);
+                    TransferManager.TransferOffer offer = default;
                     offer.Priority = 7;
                     offer.Building = buildingID;
                     offer.Position = buildingData.m_position;
-                    offer.Amount = (int)(num34 / 8000);
+                    offer.Amount = num34 / 8000;
                     offer.Active = false;
 
                     if (offer.Amount > 0)
@@ -63,11 +54,11 @@ namespace RealGasStation.NewAI
                     if (num34 >= 0)
                     {
                         System.Random rand = new System.Random();
-                        TransferManager.TransferOffer offer = default(TransferManager.TransferOffer);
+                        TransferManager.TransferOffer offer = default;
                         offer.Priority = rand.Next(8);
                         offer.Building = buildingID;
                         offer.Position = buildingData.m_position;
-                        offer.Amount = (int)((num34 - 0) / 400);
+                        offer.Amount = ((num34 - 0) / 400);
                         offer.Active = false;
 
                         if ((int)(num34 / 400) > 0)
@@ -90,11 +81,11 @@ namespace RealGasStation.NewAI
                     if (num34 >= 0)
                     {
                         System.Random rand = new System.Random();
-                        TransferManager.TransferOffer offer = default(TransferManager.TransferOffer);
+                        TransferManager.TransferOffer offer = default;
                         offer.Priority = rand.Next(8);
                         offer.Building = buildingID;
                         offer.Position = buildingData.m_position;
-                        offer.Amount = (int)((num34 - 0) / 400);
+                        offer.Amount = ((num34 - 0) / 400);
                         offer.Active = false;
 
                         if ((int)(num34 / 400) > 0)
@@ -113,21 +104,19 @@ namespace RealGasStation.NewAI
             int num2 = 0;
             while (num != 0)
             {
-                if ((TransferManager.TransferReason)instance.m_vehicles.m_buffer[(int)num].m_transferType == material)
+                if ((TransferManager.TransferReason)instance.m_vehicles.m_buffer[num].m_transferType == material)
                 {
-                    VehicleInfo info = instance.m_vehicles.m_buffer[(int)num].Info;
-                    int a;
-                    int num3;
-                    info.m_vehicleAI.GetSize(num, ref instance.m_vehicles.m_buffer[(int)num], out a, out num3);
+                    VehicleInfo info = instance.m_vehicles.m_buffer[num].Info;
+                    info.m_vehicleAI.GetSize(num, ref instance.m_vehicles.m_buffer[num], out int a, out int num3);
                     cargo += Mathf.Min(a, num3);
                     capacity += num3;
                     count++;
-                    if ((instance.m_vehicles.m_buffer[(int)num].m_flags & (Vehicle.Flags.Importing | Vehicle.Flags.Exporting)) != (Vehicle.Flags)0)
+                    if ((instance.m_vehicles.m_buffer[num].m_flags & (Vehicle.Flags.Importing | Vehicle.Flags.Exporting)) != (Vehicle.Flags)0)
                     {
                         outside++;
                     }
                 }
-                num = instance.m_vehicles.m_buffer[(int)num].m_nextGuestVehicle;
+                num = instance.m_vehicles.m_buffer[num].m_nextGuestVehicle;
                 if (++num2 > Singleton<VehicleManager>.instance.m_vehicles.m_size)
                 {
                     CODebugBase<LogChannel>.Error(LogChannel.Core, "Invalid list detected!\n" + Environment.StackTrace);

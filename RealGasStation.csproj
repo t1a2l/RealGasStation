@@ -36,19 +36,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>F:\SteamLibrary\steamapps\common\Cities_Skylines\Cities_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\Program Files (x86)\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="CitiesHarmony.API, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\CitiesHarmony.API.2.0.0\lib\net35\CitiesHarmony.API.dll</HintPath>
+    <Reference Include="CitiesHarmony.API, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\CitiesHarmony.API.2.1.0\lib\net35\CitiesHarmony.API.dll</HintPath>
     </Reference>
     <Reference Include="CitiesHarmony.Harmony, Version=2.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\CitiesHarmony.Harmony.2.0.4\lib\net35\CitiesHarmony.Harmony.dll</HintPath>
+      <HintPath>packages\CitiesHarmony.Harmony.2.2.0\lib\net35\CitiesHarmony.Harmony.dll</HintPath>
     </Reference>
     <Reference Include="ColossalManaged">
-      <HintPath>F:\SteamLibrary\steamapps\common\Cities_Skylines\Cities_Data\Managed\ColossalManaged.dll</HintPath>
+      <HintPath>..\..\Program Files (x86)\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ColossalManaged.dll</HintPath>
     </Reference>
     <Reference Include="ICities">
-      <HintPath>F:\SteamLibrary\steamapps\common\Cities_Skylines\Cities_Data\Managed\ICities.dll</HintPath>
+      <HintPath>..\..\Program Files (x86)\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ICities.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,13 +57,11 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>F:\SteamLibrary\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\Program Files (x86)\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomAI\CustomCargoTruckAI.cs" />
-    <Compile Include="CustomManager\CustomTransferManager.cs" />
-    <Compile Include="NewAI\GasStationAI.cs" />
+    <Compile Include="AI\GasStationAI.cs" />
     <Compile Include="Patch\CarAIPathfindFailurePatch.cs" />
     <Compile Include="Patch\PassengerCarAIArriveAtTargetPatch.cs" />
     <Compile Include="Patch\CargoTruckAIArriveAtTargetPatch.cs" />
@@ -106,15 +104,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rd /q /s "F:\SteamLibrary\steamapps\workshop\content\255710\1623509958"
-mkdir "F:\SteamLibrary\steamapps\workshop\content\255710\1623509958"
-copy "D:\Mod\RealGasStation\bin\Release\RealGasStation.dll"  "F:\SteamLibrary\steamapps\workshop\content\255710\1623509958\RealGasStation.dll"
-copy "D:\Mod\RealGasStation\bin\Release\CitiesHarmony.API.dll"  "F:\SteamLibrary\steamapps\workshop\content\255710\1623509958\CitiesHarmony.API.dll"
-mkdir "F:\SteamLibrary\steamapps\workshop\content\255710\1623509958\Locales"
-copy "D:\Mod\RealGasStation\Locales\*.txt" "F:\SteamLibrary\steamapps\workshop\content\255710\1623509958\Locales"
-mkdir "F:\SteamLibrary\steamapps\workshop\content\255710\1623509958\Icon"
-copy "D:\Mod\RealGasStation\Icon\*.png" "F:\SteamLibrary\steamapps\workshop\content\255710\1623509958\Icon"
-copy "D:\Mod\RealGasStation\PreviewImage.png"  "F:\SteamLibrary\steamapps\workshop\content\255710\1623509958\PreviewImage.png"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

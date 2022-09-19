@@ -2,11 +2,8 @@
 using ColossalFramework.UI;
 using HarmonyLib;
 using ICities;
-using RealGasStation.CustomManager;
 using RealGasStation.UI;
 using RealGasStation.Util;
-using System;
-using System.Reflection;
 
 namespace RealGasStation
 {
@@ -99,32 +96,31 @@ namespace RealGasStation
                         PlayerBuildingUI.refeshOnce = true;
                     }
 
-                    CustomTransferManager.CustomSimulationStepImpl();
                 }
             }
         }
 
         public static void RefreshDummyCargoFuel()
         {
-            dummyCargoNeedFuel = (dummyCargoCount > 1000) ? true : false;
+            dummyCargoNeedFuel = dummyCargoCount > 1000;
             dummyCargoCount = (dummyCargoCount > 1000) ? (ushort)0 : dummyCargoCount;
         }
 
         public static void RefreshDummyCarFuel()
         {
-            dummyCarNeedFuel = (dummyCarCount > 1000) ? true : false;
+            dummyCarNeedFuel = dummyCarCount > 1000;
             dummyCarCount = (dummyCarCount > 1000) ? (ushort)0 : dummyCarCount;
         }
 
         public static void RefreshCargoFuel()
         {
-            cargoNeedFuel = (cargoCount > 1500) ? true : false;
+            cargoNeedFuel = cargoCount > 1500;
             cargoCount = (cargoCount > 1500) ? (ushort)0 : cargoCount;
         }
 
         public static void RefreshCarFuel()
         {
-            carNeedFuel = (carCount > 1500) ? true : false;
+            carNeedFuel = carCount > 1500;
             carCount = (carCount > 1500) ? (ushort)0 : carCount;
         }
     }
